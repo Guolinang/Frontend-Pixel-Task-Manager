@@ -1,0 +1,376 @@
+:root {
+  /* fonts */
+  --under-font: "Determination_Mono";
+
+  /* font sizes */
+  /*--font-size-main: 1.3em;
+  --font-size-prompt: 0.75em;*/
+
+  --font-size-main: 6vw;
+  --font-size-prompt: 4vw;
+
+  /* Colors */
+  --color-black: #000;
+  --color-gray-100: rgba(255, 255, 255, 0.72);
+  --color-darkslategray: #3a4c67;
+
+  /* Gaps */
+  --gap-xl: 20px;
+
+  /* Paddings */
+  --padding-3xs: 10px;
+  --padding-12xs: 1px;
+
+  /* Border radiuses */
+  --br-61xl: 80px;
+
+  --color-back-black: rgba(39, 16, 90, 0.71);
+  --color-back-blue: rgba(5, 87, 133, 0.49);
+}
+
+@font-face {
+  font-family: "under";
+  src: url("@/assets/font/undertale-font-rus-eng.ttf") format("truetype");
+}
+
+@media (min-width: 320px) {
+  ul {
+    padding: 0;
+  }
+
+  .l_base {
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    background-image: url("@/assets/images/Log.png"),
+      linear-gradient(
+        180deg,
+        var(--color-back-black) 14.06%,
+        var(--color-back-blue)
+      );
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    z-index: 0;
+  }
+
+  .l_main_container {
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .login_window {
+    margin: 0;
+    padding-bottom: 4%;
+    padding-top: 4%;
+    width: 55vw;
+    height: 26vh;
+    position: absolute;
+    top: 18vh;
+    border-radius: 40px;
+    background-color: #fefefe;
+    mix-blend-mode: normal;
+    opacity: 90%;
+    font-family: "under";
+    padding-left: 5vw;
+    padding-right: 5vw;
+    list-style-type: none;
+    flex-direction: column;
+    align-content: center;
+    display: flex;
+    gap: 5%;
+    justify-content: space-between;
+  }
+
+  .login_title {
+    font-size: var(--font-size-main);
+    align-self: center;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .login_text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    font-size: var(--font-size-prompt);
+    display: flex;
+    flex-direction: column;
+    height: 1fr;
+
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .login_prompt {
+    background-color: #ffffff;
+    opacity: 72%;
+    border-bottom: 2px, solid, rgb(58, 76, 103);
+    border-radius: 20px;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    padding-left: 5%;
+    padding-right: 5%;
+    height: 4.25vw;
+    font-family: "under";
+    font-size: 2.8vw;
+  }
+
+  .login_options {
+    display: flex;
+    justify-content: space-between;
+    /*font-size: 0.68em;*/
+    font-size: 3.1vw;
+    justify-self: flex-end;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+  }
+
+  .login_sign_up {
+    font-family: "under";
+    border: none;
+    background-color: transparent;
+    justify-self: flex-start;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .login_sign_up:hover {
+    color: #3e326b;
+    cursor: pointer;
+  }
+
+  .login_confirm {
+    font-family: "under";
+    border: none;
+    background-color: transparent;
+    justify-self: flex-end;
+    padding-bottom: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .login_confirm:hover {
+    color: #3e326b;
+    cursor: pointer;
+  }
+  .cloud {
+    position: absolute;
+    height: auto;
+    width: 40vw;
+    left: calc(100% - 40vw);
+    top: -20px;
+    z-index: 5;
+  }
+}
+
+@media ((min-width: 550px)) {
+  .l_base {
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    background-image: url("@/assets/images/Log_full2.png"),
+      linear-gradient(
+        180deg,
+        var(--color-back-black) 14.06%,
+        var(--color-back-blue)
+      );
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+  }
+
+  .l_main_container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .login_window {
+    padding-bottom: 4%;
+    padding-top: 2%;
+    width: 35vw;
+    height: 22vh;
+    top: 20vh;
+    border-radius: 40px;
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
+
+  .login_title {
+    font-size: 3vw;
+    align-self: center;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .login_text {
+    gap: 0.5rem;
+    font-size: 2vw;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .login_prompt {
+    background-color: #ffffff;
+    opacity: 72%;
+    border-bottom: 2px, solid, rgb(58, 76, 103);
+    border-radius: 20px;
+    height: 2vw;
+    font-size: 2vw;
+  }
+
+  .login_options {
+    font-size: 2vw;
+  }
+}
+/*------------------------------------------------*/
+
+@media ((min-width: 800px)) {
+  .l_base {
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    background-image: url("@/assets/images/Log_full2.png"),
+      linear-gradient(
+        180deg,
+        var(--color-back-black) 14.06%,
+        var(--color-back-blue)
+      );
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+  }
+
+  .l_main_container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .login_window {
+    padding-bottom: 4%;
+    padding-top: 2%;
+    width: 30vw;
+    height: 19vh;
+    top: 20vh;
+    border-radius: 40px;
+    padding-left: 2vw;
+    padding-right: 2vw;
+  }
+
+  .login_title {
+    font-size: 3vw;
+    align-self: center;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .login_text {
+    gap: 0.5rem;
+    font-size: 2vw;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .login_prompt {
+    background-color: #ffffff;
+    opacity: 72%;
+    border-bottom: 2px, solid, rgb(58, 76, 103);
+    border-radius: 20px;
+    height: 2vw;
+    font-size: 2vw;
+  }
+
+  .login_options {
+    font-size: 2vw;
+  }
+}
+
+@media ((min-width: 1000px)) {
+  .l_base {
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    background-image: url("@/assets/images/Log_full2.png"),
+      linear-gradient(
+        180deg,
+        var(--color-back-black) 14.06%,
+        var(--color-back-blue)
+      );
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+  }
+
+  .login_window {
+    width: 30vw;
+    height: 19vh;
+  }
+
+  .login_title {
+    font-size: 1.5vw;
+  }
+
+  .login_text {
+    font-size: 1.5vw;
+  }
+
+  .login_prompt {
+    height: 2vw;
+    font-size: 1.5vw;
+  }
+
+  .login_options {
+    font-size: 1.5vw;
+  }
+}
+
+@media ((min-width: 1450px)) {
+  .l_base {
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+    background-image: url("@/assets/images/Log_full2.png"),
+      linear-gradient(
+        180deg,
+        var(--color-back-black) 14.06%,
+        var(--color-back-blue)
+      );
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+  }
+
+  .login_window {
+    width: 20vw;
+    height: 19vh;
+  }
+
+  .login_title {
+    font-size: 1.2vw;
+  }
+
+  .login_text {
+    font-size: 1.2vw;
+  }
+
+  .login_prompt {
+    height: 2vw;
+    font-size: 1.2vw;
+  }
+
+  .login_options {
+    font-size: 1.2vw;
+  }
+}

@@ -1,0 +1,174 @@
+:root {
+  --c-theme-primary: rgba(251, 188, 211, 0.9);
+  --c-theme-primary-accent: rgba(201, 133, 158, 0.8);
+  --c-bg-tertiary: rgba(254, 254, 254, 1);
+  --c-text-primary: rgba(69, 12, 39, 1);
+  --c-text-secondary: rgba(69, 12, 39, 0.5);
+}
+
+@font-face {
+  font-family: "under";
+  src: url("@/assets/font/undertale-font-rus-eng.ttf") format("truetype");
+}
+.c_modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  /* height: 100vh;
+    width: 100vw; */
+  /* background-color: rgba(0, 0, 0, 0.6); */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* visibility: hidden;
+    opacity: 0; */
+  transition: opacity 0.4s, visibility 0.4s;
+  transform: translate(-50%, -50%);
+}
+
+/* .c_modal.open {
+    visibility: visible;
+    opacity: 1;
+  } */
+
+.c_modal_box {
+  width: 85vw;
+  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--c-bg-primary);
+  color: var(--c-text-primary);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+button:focus {
+  outline: 0;
+}
+
+.datepicker {
+  width: 95%;
+  max-width: 350px;
+  background-color: var(--c-bg-tertiary);
+  border-radius: 20px;
+  box-shadow: 0 0 2px 0 rgba(69, 12, 39, 0.2),
+    0 5px 10px 0 rgba(69, 12, 39, 0.2);
+  padding: 1rem;
+}
+
+.datepicker-top {
+  margin-bottom: 1rem;
+}
+
+.month-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow_c {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background-color: #fff;
+  border-radius: 15px;
+  width: 2.5rem;
+  height: 2.5rem;
+  box-shadow: 0 0 2px 0 rgba(69, 12, 39, 0.25), 0 0 10px 0 rgba(69, 12, 39, 0.2);
+}
+
+.month-name {
+  font-weight: 600;
+}
+
+.datepicker-calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-row-gap: 5px;
+}
+
+.day,
+.dates {
+  justify-self: center;
+}
+
+.day {
+  color: var(--c-text-secondary);
+  font-size: 0.875em;
+  font-weight: 500;
+  justify-self: center;
+}
+
+.dates {
+  border: 0;
+  padding: 0;
+  color: rgba(69, 12, 39, 1);
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-weight: 600;
+  border: 2px solid transparent;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.dates:focus {
+  color: var(--c-theme-primary);
+  border: 2px solid var(--c-theme-primary-accent);
+}
+
+.dates:hover {
+  border-color: rgba(197, 0, 53, 0.288);
+}
+.faded {
+  color: var(--c-text-secondary);
+}
+
+.active_d {
+  color: rgba(69, 12, 39, 1);
+  border-color: var(--c-theme-primary);
+  background-color: var(--c-theme-primary);
+  border-radius: 8px;
+  height: 100%;
+  width: 100%;
+  align-content: center;
+}
+
+.current-day:focus {
+  background-color: var(--c-theme-primary-accent);
+}
+
+.calendar_arrowright_c {
+  background-image: url("@/assets/images/calendarrow.png");
+  transform: rotate(180deg);
+  opacity: 80%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0);
+  height: 25px;
+  width: 25px;
+  align-self: center;
+  margin-right: 5px;
+  border: 0;
+}
+
+.calendar_arrowleft_c {
+  background-image: url("@/assets/images/calendarrow.png");
+  opacity: 80%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-color: rgba(0, 0, 0, 0);
+  height: 25px;
+  width: 25px;
+  align-self: center;
+  margin-left: 5px;
+  border: 0;
+}

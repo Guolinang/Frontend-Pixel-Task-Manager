@@ -1,0 +1,190 @@
+:root {
+  --color-dark-pink: rgba(201, 133, 158, 0.45);
+  --color-dark-pink1: rgba(167, 90, 118, 0.45);
+  /* --color-white: rgba(255, 255, 255, 0.97); */
+  --color-light-pink: rgba(249, 222, 232, 1);
+  --color-main-pink: rgba(251, 188, 211, 0.7);
+  --color-back-black: rgba(39, 16, 90, 0.71);
+  --color-back-blue: rgba(5, 87, 133, 0.49);
+  --color-white: #f0eff3;
+  --color-border: rgba(69, 12, 39, 0.5);
+}
+
+@font-face {
+  font-family: "under";
+  src: url("@/assets/font/undertale-font-rus-eng.ttf") format("truetype");
+}
+
+@media (min-width: 320px) and (max-width: 375px) {
+}
+html {
+  overflow: hidden;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+body {
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  width: 100vh;
+  height: 100vh;
+  border: 30px;
+}
+
+.main {
+  background-color: #f0eff3;
+  width: 100vw;
+  height: 60%;
+  z-index: 2000;
+  top: 20%;
+  position: absolute;
+  border-radius: 30px;
+}
+
+.h_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.h_view {
+  display: flex;
+  width: 100%;
+  height: 80%;
+  border-radius: 30px;
+}
+
+.h_back {
+  height: 100%;
+  width: 100%;
+  background-image: url("@/assets/images/character/back/back.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center bottom;
+  border-radius: 30px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.h_changes {
+  display: flex;
+  background-color: rgba(223, 248, 248, 0.671);
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  flex-direction: column;
+}
+
+.h_title {
+  width: 100%;
+  height: 10%;
+  background-color: rgb(195, 216, 216);
+  flex-direction: row;
+  display: flex;
+  z-index: 20;
+}
+
+.h_title_elements {
+  margin: 5px;
+  margin-left: 10px;
+  font-size: medium;
+  font-family: "under";
+  border: 0;
+  background-color: rgba(154, 192, 192, 0);
+}
+
+.h_title_elements:hover {
+  color: #60538f;
+}
+
+.h_title_elements_focus {
+  color: #625494;
+}
+
+.h_table {
+  width: 100%;
+  overflow-y: scroll;
+  height: 90%;
+}
+
+.h_table_elements {
+  height: 30%;
+}
+
+.h_character_conteiner {
+  height: 100%;
+  position: relative;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 40px;
+  z-index: 10;
+}
+
+.h_body {
+  position: absolute;
+  image-rendering: pixelated;
+  height: 100%;
+  width: auto;
+}
+
+.h_hair {
+  position: absolute;
+  image-rendering: pixelated;
+  height: 100%;
+  width: auto;
+}
+
+.h_face {
+  position: absolute;
+  image-rendering: pixelated;
+  height: 100%;
+  width: auto;
+}
+
+.h_dress {
+  position: absolute;
+  image-rendering: pixelated;
+  height: 100%;
+  width: auto;
+}
+
+.h_other {
+  position: absolute;
+  image-rendering: pixelated;
+  height: 100%;
+  width: auto;
+}
+
+.h_accept {
+  margin-bottom: 10px;
+  font-family: "under";
+  border: 0px;
+}
+
+.h_accept:hover {
+  color: #60538f;
+}
+
+.h_s_body {
+  width: 100%;
+  overflow-y: scroll;
+  height: 90%;
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+}
+
+.h_s_body_img {
+  height: 100px;
+  width: auto;
+}

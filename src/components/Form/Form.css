@@ -1,0 +1,418 @@
+:root {
+  --color-dark-pink: rgba(201, 133, 158, 0.45);
+  --color-dark-pink1: rgba(167, 90, 118, 0.45);
+  /* --color-white: rgba(255, 255, 255, 0.97); */
+  --color-light-pink: rgba(249, 222, 232, 1);
+  --color-main-pink: rgba(251, 188, 211, 0.7);
+  --color-back-black: rgba(39, 16, 90, 0.71);
+  --color-back-blue: rgba(5, 87, 133, 0.49);
+  --color-white: rgba(254, 254, 254, 0.91);
+  --color-border: rgb(0, 0, 0);
+}
+
+@font-face {
+  font-family: "under";
+  src: url("@/assets/font/undertale-font-rus-eng.ttf") format("truetype");
+}
+
+@media (min-width: 320px) {
+  .form_box {
+    transition: opacity 0.4s, visibility 0.4s;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    position: fixed;
+    font-family: "under";
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    top: 50%;
+    left: 50%;
+    /* line-height: 9px; */
+  }
+
+  .form_window {
+    background: rgb(236, 186, 206);
+    background-image: url("@/assets/images/Form.png"),
+      linear-gradient(
+        180deg,
+        rgba(236, 186, 206, 1) 0%,
+        rgba(219, 160, 182, 1) 30%,
+        rgba(192, 216, 255, 1) 100%
+      );
+    position: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 80vw;
+    height: 65vh;
+    border-radius: 30px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    background-position: center center;
+    max-width: 450px;
+  }
+
+  .form {
+    justify-content: center;
+    justify-self: center;
+    align-self: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 10px;
+    position: relative;
+    display: flex;
+  }
+
+  .header_form {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    font-size: 4.9vw;
+  }
+
+  .input_fields {
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    display: flex;
+  }
+
+  .in_rect {
+    cursor: pointer;
+    background-color: #ffffff;
+    opacity: 72%;
+    border-radius: calc(4vh / 2);
+    padding-left: 5%;
+    padding-right: 5%;
+    height: 4.25vw;
+    font-family: "under";
+    font-size: 2.8vw;
+    height: 4vh;
+    width: 80%;
+    margin-bottom: 1vh;
+    font-size: 10px;
+    text-align: start;
+  }
+
+  .in_rect_s {
+    background-color: #ffffff;
+    opacity: 72%;
+    border-radius: calc(4vh / 2);
+    padding-left: 5%;
+    padding-right: 5%;
+    height: 4.25vw;
+    font-family: "under";
+    font-size: 2.8vw;
+    height: 4vh;
+    width: 28vw;
+    margin-bottom: 1vh;
+    font-size: 10px;
+    display: inline-block;
+    justify-content: space-between;
+    color: black;
+  }
+
+  .in_line {
+    display: flex;
+    width: 90%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .input_s {
+    outline: none;
+    border: 0px;
+    font-family: "under";
+    font-size: 10px;
+    padding-inline: 0px;
+    padding-block: 0px;
+    /* text-align: right; */
+    margin-left: 10px;
+    width: 100%;
+    border-radius: 20px;
+    height: 100%;
+  }
+
+  .line {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    font-family: "under";
+    font-size: 15px;
+    margin-left: 5px;
+    height: 100%;
+    align-items: center;
+    word-wrap: break-word;
+  }
+
+  .in_rect_sub {
+    background-color: #ffffff;
+    opacity: 72%;
+    border-radius: 2.1vh;
+    padding-left: 5%;
+    padding-right: 5%;
+    height: 4.25vw;
+    font-family: "under";
+    font-size: 2.8vw;
+    height: 7vh;
+    width: 80%;
+    margin-bottom: 10px;
+    font-size: 10px;
+    text-align: start;
+  }
+
+  .in_rect_l {
+    background-color: #ffffff;
+    opacity: 72%;
+    border-radius: 3vh;
+    padding-left: 5%;
+    padding-right: 5%;
+    height: 4.25vw;
+    font-family: "under";
+    font-size: 2.8vw;
+    height: 10vh;
+    width: 80%;
+    margin-bottom: 10px;
+    font-size: 10px;
+    text-align: start;
+  }
+
+  .sub {
+    display: flex;
+    width: 90%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+
+  .subtask {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+  }
+
+  .aaa {
+    width: 100%;
+    height: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .input_l {
+    outline: none;
+    resize: none;
+    border: 0px;
+    font-family: "under";
+    font-size: 10px;
+    padding-inline: 0px;
+    padding-block: 0px;
+    text-align: left;
+    margin-left: 10px;
+    /* border-radius: 20px; */
+    width: 93%;
+    max-height: 100%;
+  }
+
+  .footer_form {
+    display: flex;
+    width: 80%;
+    height: 7vw;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
+  .form_button {
+    background-color: rgba(243, 188, 208, 0.596);
+    height: 100%;
+    font-size: 3vw;
+    border-radius: 5px;
+    border: 2px solid rgba(65, 34, 45, 0.048);
+    width: 17vw;
+    text-align: center;
+  }
+
+  .form_button_done {
+    background-color: rgba(148, 220, 238, 0.329);
+    height: 100%;
+    font-size: 3vw;
+    border-radius: 5px;
+    border: 2px solid rgba(73, 139, 156, 0.336);
+  }
+
+  .stars {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .un_star {
+    background-image: url("@/assets/images/Star_u.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 15px;
+    width: 19.22px;
+    margin: 2px;
+    border: 0px;
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  .a_star {
+    background-image: url("@/assets/images/Star_a.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 15px;
+    width: 19.22px;
+    margin: 2px;
+    border: 0px;
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  .date_pick {
+    color: rgba(0, 0, 0, 0.747);
+  }
+
+  .repeat_pick {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 2.7vw;
+  }
+
+  .repeat {
+    margin-right: 1.5px;
+    margin-left: 1.5px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+
+    transition: all 0.2s;
+  }
+
+  .repeat:hover {
+    color: rgba(197, 0, 53, 0.84);
+  }
+
+  .repeat_a {
+    margin-right: 1.5px;
+    margin-left: 1.5px;
+    color: rgba(197, 0, 53, 0.84);
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+
+  .text {
+    cursor: pointer;
+    border: 0px;
+    font-family: "under";
+    font-size: 10px;
+    padding-inline: 0px;
+    padding-block: 0px;
+    text-align: right;
+    margin-left: 10px;
+    width: 100%;
+    height: 100%;
+  }
+
+  .text::placeholder {
+    transition: all 0.2s;
+  }
+
+  .text:hover.text::placeholder {
+    color: rgb(114, 0, 0);
+  }
+
+  .c_stat {
+    border-radius: 10px;
+    border: 0;
+    width: 100%;
+    font-family: "under";
+    font-size: 3vw;
+  }
+
+  .label {
+    font-size: 1vh;
+  }
+
+  .subt {
+    width: 40vw;
+    max-width: 230px;
+  }
+
+  .input_sl {
+    border: 0px;
+    font-family: "under";
+    font-size: 10px;
+    padding-inline: 0px;
+    padding-block: 0px;
+    /* text-align: right; */
+    margin-left: 10px;
+    width: 60%;
+    border-radius: 20px;
+    height: 100%;
+  }
+
+  .opt {
+    background-color: #f4e6ed;
+    font-family: "under";
+  }
+
+  .red {
+    color: rgb(114, 0, 0);
+  }
+
+  .important {
+    background-image: url("@/assets/images/imp.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 20px;
+    width: 20px;
+    margin: 2px;
+    border: 0px;
+    background-color: rgba(0, 0, 0, 0);
+  }
+
+  .important_u {
+    background-image: url("@/assets/images/imp_u.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 20px;
+    width: 20px;
+    margin: 2px;
+    border: 0px;
+    background-color: rgba(0, 0, 0, 0);
+  }
+}
+
+@media (min-width: 700px) {
+  .header_form {
+    font-size: 24px;
+  }
+
+  .line {
+    font-size: 18px;
+  }
+
+  .c_stat {
+    font-size: 16px;
+  }
+
+  .repeat_pick {
+    font-size: 16px;
+  }
+
+  .form_button {
+    font-size: 16px;
+    margin-bottom: 5px;
+    width: 35%;
+  }
+}
