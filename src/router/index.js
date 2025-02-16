@@ -22,4 +22,14 @@ const routes = [
 export const router = createRouter({
   history: createWebHistory(),
   routes,
+  beforeEach: (to, from, next) => {
+    if (to.matched.some((route) => route.meta.requiresAuth)) {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        next("/"); // Перенаправление на логин
+        return;
+      }
+    }
+    next();
+  },
 });

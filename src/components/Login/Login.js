@@ -26,6 +26,8 @@ export default {
         body: JSON.stringify(user),
       });
       if (response.ok) {
+        let res = await response.json();
+        localStorage.setItem("token", res["token"]);
         this.$router.push("/task");
       }
     },

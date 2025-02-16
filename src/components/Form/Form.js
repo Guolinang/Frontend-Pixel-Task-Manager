@@ -51,12 +51,15 @@ export default {
   },
 
   created() {
-    this.day = new Date().getDate();
+    this.day = new Date().getDay();
     this.month = new Date().getMonth();
     this.year = new Date().getFullYear();
   },
 
   watch: {
+    i_id(i_id) {
+      this.t_id = i_id;
+    },
     i_name(i_name) {
       this.t_name = i_name;
     },
@@ -90,6 +93,7 @@ export default {
         this.t_difficulty = 3;
         this.stars = [true, true, true];
       }
+      console.log("D:", this.difficulty);
     },
     i_subtask(i_subtask) {
       this.t_subtask[0] = i_subtask[0];
@@ -115,7 +119,7 @@ export default {
 
     i_urgency(i_urgency) {
       this.t_urgency = i_urgency;
-      this.day = i_urgency.getDate();
+      this.day = i_urgency.getDay();
       this.month = i_urgency.getMonth();
       this.year = i_urgency.getFullYear();
     },
@@ -144,24 +148,132 @@ export default {
       if (flag == true) {
         return;
       }
+
       this.t_id = new DataTransfer().getTime;
       this.t_subtask[1] = document.getElementById("sub1").value;
       this.t_subtask[2] = document.getElementById("sub2").value;
       this.t_subtask[3] = document.getElementById("sub3").value;
-      this.$emit("accept-form", {
+      this.$emit("accept-form", {});
+      this.createTask();
+      this.clean();
+    },
+    async createTask() {
+      let repStr = "";
+      for (let i = 0; i < this.t_repeat.length; i++) {
+        if (this.t_repeat[i] == true) {
+          repStr += "1";
+        } else {
+          repStr += "0";
+        }
+      }
+
+      let tmpdate = new Date(
+        this.t_urgency.getFullYear(),
+        this.t_urgency.getMonth(),
+        this.t_urgency.getDate(),
+        4
+      );
+
+      let response = await fetch("http://localhost:8000/tasks", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          Authorization: localStorage.getItem("token"),
+        },
+
+        body: JSON.stringify({
+          name: this.t_name,
+          s_desc: this.t_s_desc,
+          type: this.t_type,
+          stat: this.t_stat,
+          difficulty: this.t_difficulty,
+          urgency: tmpdate,
+          repeat: repStr,
+          subtask: this.t_subtask.join("|"),
+          l_desc: this.t_l_desc,
+          important: this.t_important,
+          done: false,
+        }),
+      });
+    },
+
+    async deleteTask() {
+      let response = await fetch("http://localhost:8000/tasks", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          Authorization: localStorage.getItem("token"),
+        },
+
+        body: JSON.stringify({
+          id: this.t_id,
+        }),
+      });
+      if (!response.ok) {
+        alert("Error deleting task");
+      }
+    },
+
+    async updateTask() {
+      let repStr = "";
+      for (let i = 0; i < this.t_repeat.length; i++) {
+        if (this.t_repeat[i] == true) {
+          repStr += "1";
+        } else {
+          repStr += "0";
+        }
+      }
+
+      let tmpdate = new Date(
+        this.t_urgency.getFullYear(),
+        this.t_urgency.getMonth(),
+        this.t_urgency.getDate(),
+        4
+      );
+
+      console.log(this.difficulty);
+
+      console.log({
+        id: this.t_id,
         name: this.t_name,
         s_desc: this.t_s_desc,
         type: this.t_type,
         stat: this.t_stat,
-        diff: this.t_difficulty,
-        urgency: this.t_urgency,
-        repeat: this.t_repeat,
-        subtask: this.t_subtask,
+        difficulty: this.t_difficulty,
+        urgency: tmpdate,
+        repeat: repStr,
+        subtask: this.t_subtask.join("|"),
         l_desc: this.t_l_desc,
-        id: this.t_id,
+        important: this.t_important,
+        done: this.flag_done,
       });
-      this.clean();
+
+      let response = await fetch("http://localhost:8000/tasks", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          Authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          id: this.t_id,
+          name: this.t_name,
+          s_desc: this.t_s_desc,
+          type: this.t_type,
+          stat: this.t_stat,
+          difficulty: this.t_difficulty,
+          urgency: tmpdate,
+          repeat: repStr,
+          subtask: this.t_subtask.join("|"),
+          l_desc: this.t_l_desc,
+          important: this.t_important,
+          done: this.flag_done,
+        }),
+      });
+      if (!response.ok) {
+        alert("Error updating task");
+      }
     },
+
     formDecline() {
       this.warnings = {
         name: false,
@@ -173,7 +285,7 @@ export default {
       this.$emit("decline-form");
     },
 
-    formOk() {
+    async formOk() {
       this.warnings = {
         name: false,
         type: false,
@@ -197,46 +309,26 @@ export default {
         return;
       }
 
-      this.$emit("change-form", {
-        name: this.t_name,
-        s_desc: this.t_s_desc,
-        type: this.t_type,
-        stat: this.t_stat,
-        diff: this.t_difficulty,
-        urgency: this.t_urgency,
-        repeat: this.t_repeat,
-        subtask: this.t_subtask,
-        l_desc: this.t_l_desc,
-        important: this.t_important,
-        flag_done: false,
-      });
+      await this.updateTask();
+
+      this.$emit("change-form", {});
       this.clean();
     },
 
-    formDelete() {
-      this.$emit("delete-form", {
-        name: this.t_name,
-        s_desc: this.t_s_desc,
-        type: this.t_type,
-        stat: this.t_stat,
-        diff: this.t_difficulty,
-        urgency: this.t_urgency,
-        repeat: this.t_repeat,
-        subtask: this.t_subtask,
-        l_desc: this.t_l_desc,
-        important: this.t_important,
-        flag_done: false,
-      });
+    async formDelete() {
+      await this.deleteTask();
+
+      this.$emit("delete-form", {});
       this.clean();
     },
 
-    formDone() {
+    async formDone() {
       this.$emit("done-form", {
         name: this.t_name,
         s_desc: this.t_s_desc,
         type: this.t_type,
         stat: this.t_stat,
-        diff: this.t_difficulty,
+        difficulty: this.t_difficulty,
         urgency: this.t_urgency,
         repeat: this.t_repeat,
         subtask: this.t_subtask,
@@ -244,6 +336,8 @@ export default {
         important: this.t_important,
         flag_done: true,
       });
+      this.flag_done = true;
+      await this.updateTask();
       this.clean();
     },
 

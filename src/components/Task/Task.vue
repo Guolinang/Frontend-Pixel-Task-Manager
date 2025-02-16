@@ -25,7 +25,7 @@
             doneTask(obj);
           }
         "
-        :i_flag="f_flag"
+        :i_flag="c_flag"
         :i_name="c_name"
         :i_s_desc="c_s_desc"
         :i_type="c_type"

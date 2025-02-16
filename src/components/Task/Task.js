@@ -1,6 +1,6 @@
 import Calendar from "../Calendar/Calendar.vue";
 import Form from "../Form/Form.vue";
-import { ref } from "vue";
+import { onUpdated, ref } from "vue";
 
 export default {
   components: {
@@ -12,6 +12,7 @@ export default {
       window: {
         width: 0,
       },
+      firstUpd: true,
       showModal: false,
       showForm: false,
       flagL: false,
@@ -32,124 +33,9 @@ export default {
       c_important: false,
       c_flag: false,
       quote: "The way up is difficult, but how good is the viewing",
-      tasks: [
-        {
-          name: "Погулять с собакой",
-          s_desc: "AAD",
-          type: "study",
-          stat: "int",
-          difficulty: 3,
-          urgency: new Date(2020, 1, 1),
-          repeat: [false, false, true, false, true, false, false],
-          subtask: [":("],
-          l_desc: "AAAAAAAAAA",
-          flag_done: false,
-          id: 1,
-          important: false,
-        },
-        {
-          name: "Стать крутым программистом",
-          s_desc: "B",
-          type: "work",
-          stat: "str",
-          difficulty: 1,
-          urgency: new Date(),
-          repeat: [false, true, true, false, true, false, false],
-          subtask: ["(:"],
-          l_desc: "AAAAAAAAAA",
-          flag_done: true,
-          id: 2,
-          important: true,
-        },
-        {
-          name: "Сдать курсовую работу",
-          s_desc: "AAD",
-          type: "study",
-          stat: "int",
-          difficulty: 2,
-          urgency: new Date(),
-          repeat: [false, false, true, false, true, false, false],
-          subtask: [":("],
-          l_desc: "AAAAAAAAAA",
-          flag_done: false,
-          id: 3,
-          important: false,
-        },
-        {
-          name: "Сделать ргр",
-          s_desc: "B",
-          type: "work",
-          stat: "str",
-          difficulty: 2,
-          urgency: new Date(),
-          repeat: [false, true, true, false, true, false, false],
-          subtask: ["(:"],
-          l_desc: "AAAAAAAAAA",
-          flag_done: true,
-          id: 4,
-          important: false,
-        },
-      ],
-      tasks_past: [
-        {
-          name: "Убраться дома",
-          s_desc: "AAD",
-          type: "study",
-          stat: "int",
-          difficulty: 3,
-          urgency: new Date(2020, 1, 1),
-          repeat: [false, false, true, false, true, false, false],
-          subtask: [":("],
-          l_desc: "AAAAAAAAAA",
-          flag_done: false,
-          id: 1,
-          important: false,
-        },
-        {
-          name: "Отдохнуть",
-          s_desc: "B",
-          type: "work",
-          stat: "str",
-          difficulty: 1,
-          urgency: new Date(),
-          repeat: [false, true, true, false, true, false, false],
-          subtask: ["(:"],
-          l_desc: "AAAAAAAAAA",
-          flag_done: true,
-          id: 2,
-          important: true,
-        },
-      ],
-      tasks_important: [
-        {
-          name: "Найти стажировку",
-          s_desc: "AAD",
-          type: "study",
-          stat: "int",
-          difficulty: 3,
-          urgency: new Date(2020, 1, 1),
-          repeat: [false, false, true, false, true, false, false],
-          subtask: [":("],
-          l_desc: "AAAAAAAAAA",
-          flag_done: false,
-          id: 1,
-          important: false,
-        },
-        {
-          name: "Выспаться",
-          s_desc: "B",
-          type: "work",
-          stat: "str",
-          difficulty: 1,
-          urgency: new Date(),
-          repeat: [false, true, true, false, true, false, false],
-          subtask: ["(:"],
-          l_desc: "AAAAAAAAAA",
-          flag_done: true,
-          id: 2,
-          important: true,
-        },
-      ],
+      tasks: [],
+      tasks_past: [],
+      tasks_important: [],
     };
   },
 
@@ -190,8 +76,76 @@ export default {
     }
     this.day = this.date.getDate();
   },
-
+  watch: {},
+  async updated() {
+    if (this.firstUpd) {
+      this.firstUpd = false;
+      await this.refreshTask();
+    }
+  },
   methods: {
+    async refreshTask() {
+      let response = await fetch(
+        `http://localhost:8000/tasks?date=${this.date.toISOString()}`,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+            Authorization: localStorage.getItem("token"),
+          },
+        }
+      );
+      if (response.ok) {
+        let res = await response.json();
+        //console.log(res);
+        this.tasks = res.today;
+        this.tasks.forEach((el) => {
+          el.urgency = new Date(el.urgency);
+          let newRep = [];
+          for (let i = 0; i < el.repeat.length; i++) {
+            if (el.repeat[i] == "0") {
+              newRep.push(false);
+            } else {
+              newRep.push(true);
+            }
+          }
+          el.repeat = newRep;
+          el.subtask = el.subtask.split("|");
+        });
+
+        this.tasks_important = res.important;
+        this.tasks_important.forEach((el) => {
+          el.urgency = new Date(el.urgency);
+          let newRep = [];
+          for (let i = 0; i < el.repeat.length; i++) {
+            if (el.repeat[i] == "0") {
+              newRep.push(false);
+            } else {
+              newRep.push(true);
+            }
+          }
+          el.repeat = newRep;
+          el.subtask = el.subtask.split("|");
+        });
+
+        this.tasks_past = res.unfinished;
+        this.tasks_past.forEach((el) => {
+          el.urgency = new Date(el.urgency);
+          let newRep = [];
+          for (let i = 0; i < el.repeat.length; i++) {
+            if (el.repeat[i] == "0") {
+              newRep.push(false);
+            } else {
+              newRep.push(true);
+            }
+          }
+          el.repeat = newRep;
+          el.subtask = el.subtask.split("|");
+        });
+      }
+      // console.log(this.tasks);
+    },
+
     handleResize() {
       this.window.width = window.innerWidth;
     },
@@ -201,18 +155,22 @@ export default {
 
     createTask(obj) {
       this.showForm = false;
+      this.refreshTask();
     },
 
     changeTask(obj) {
       this.showForm = false;
+      this.refreshTask();
     },
 
     doneTask(obj) {
       this.showForm = false;
+      this.refreshTask();
     },
 
     deleteTask(obj) {
       this.showForm = false;
+      this.refreshTask();
     },
 
     clickLeft() {
@@ -271,16 +229,24 @@ export default {
     changeback() {
       this.date = new Date();
       this.changeCalendar();
+      this.refreshTask();
     },
 
     mainGetDate(g_date) {
-      this.date = new Date(g_date);
+      this.date = new Date(
+        g_date.getFullYear(),
+        g_date.getMonth(),
+        g_date.getDate(),
+        4
+      );
+
       this.showModal = false;
-      this.day = this.date.getDate();
       this.changeCalendar();
+      this.refreshTask();
     },
 
     showTForm(i) {
+      console.log(i, this.tasks[i]);
       this.c_name = this.tasks[i].name;
       this.c_s_desc = this.tasks[i].s_desc;
       this.c_type = this.tasks[i].type;
@@ -291,7 +257,7 @@ export default {
       this.c_subtask = this.tasks[i].subtask;
       this.c_l_desc = this.tasks[i].l_desc;
       this.c_id = this.tasks[i].id;
-      this.f_flag = false;
+      this.c_flag = false;
       this.showForm = true;
       this.c_important = this.tasks[i].important;
     },
