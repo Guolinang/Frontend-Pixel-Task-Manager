@@ -38,7 +38,6 @@ export default {
       hairIndex: 0,
       dressIndex: 0,
       otherIndex: 0,
-      currentCharacter: [],
       wisdom: 0,
       intelligence: 0,
       strength: 0,
@@ -47,9 +46,39 @@ export default {
       level: 0,
       name: "Guwa",
       hp: 100,
+      maxhp: 100,
       exp: 100,
+      maxexp: 100,
     };
   },
+
+  async created() {
+    let response = await fetch("http://localhost:8000/character", {
+      method: "GET",
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    });
+    if (response.ok) {
+      let data = await response.json();
+      this.wisdom = data.wis;
+      this.intelligence = data.int;
+      this.strength = data.str;
+      this.constitution = data.cnst;
+      this.charisma = data.char;
+      this.level = data.level;
+      this.hp = data.hp;
+      this.exp = data.exp;
+      this.maxexp = data.maxexp;
+      this.maxhp = data.maxhp;
+      this.hairIndex = data.head;
+      this.facesIndex = data.face;
+      this.bodiesIndex = data.body;
+      this.dressIndex = data.dress;
+      this.otherIndex = data.other;
+    }
+  },
+
   computed: {
     currentBody() {
       return this.bodies[this.bodiesIndex];
@@ -72,21 +101,60 @@ export default {
     },
   },
   methods: {
+    async refreshHero() {
+      let response = await fetch("http://localhost:8000/character", {
+        method: "GET",
+        headers: {
+          Authorization: localStorage.getItem("token"),
+        },
+      });
+      if (response.ok) {
+        let data = await response.json();
+        this.wisdom = data.wis;
+        this.intelligence = data.int;
+        this.strength = data.str;
+        this.constitution = data.cnst;
+        this.charisma = data.char;
+        this.level = data.level;
+        this.hp = data.hp;
+        this.exp = data.exp;
+        this.maxexp = data.maxexp;
+        this.maxhp = data.maxhp;
+        this.hairIndex = data.head;
+        this.facesIndex = data.face;
+        this.bodiesIndex = data.body;
+        this.dressIndex = data.dress;
+        this.otherIndex = data.other;
+      }
+    },
+
     closeHero([IndexBody, IndexFace, IndexHair, IndexDress, IndexOther]) {
-      this.bodiesIndex = IndexBody;
-      this.facesIndex = IndexFace;
-      this.hairIndex = IndexHair;
-      this.dressIndex = IndexDress;
-      this.otherIndex = IndexOther;
+      let response = fetch("http://localhost:8000/character", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          Authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify({
+          body: IndexBody,
+          face: IndexFace,
+          head: IndexHair,
+          dress: IndexDress,
+          other: IndexOther,
+          wis: this.wisdom,
+          int: this.intelligence,
+          str: this.strength,
+          cnst: this.constitution,
+          char: this.charisma,
+          level: this.level,
+          hp: this.hp,
+          exp: this.exp,
+          maxexp: this.maxexp,
+          maxhp: this.maxhp,
+        }),
+      });
+      this.refreshHero();
       this.showHero = false;
-      let hero_data = {
-        body: IndexBody,
-        face: IndexFace,
-        hair: IndexHair,
-        dress: IndexDress,
-        other: IndexOther,
-      };
-      console.log(hero_data);
     },
 
     confirm() {
@@ -94,7 +162,18 @@ export default {
         login: this.$refs.login.value,
         password: this.$refs.password.value,
       };
+
+      let response = fetch("http://localhost:8000/register", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json;charset=utf-8",
+          Authorization: localStorage.getItem("token"),
+        },
+        body: JSON.stringify(user_data),
+      });
       console.log(user_data);
+      this.$refs.login.value = "";
+      this.$refs.password.value = "";
     },
 
     m_b_task() {

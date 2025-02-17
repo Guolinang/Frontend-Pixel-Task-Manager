@@ -1,7 +1,15 @@
 <template>
   <div v-show="showHero">
     <div class="overlay"></div>
-    <Character id="m_hero" @close-character="closeHero" />
+    <Character
+      id="m_hero"
+      @close-character="closeHero"
+      :iBody="bodiesIndex"
+      :iFace="facesIndex"
+      :iHair="hairIndex"
+      :iDress="dressIndex"
+      :iOther="otherIndex"
+    />
   </div>
 
   <div class="p_main_container">
@@ -32,11 +40,11 @@
             <p class="stat">level {{ level }}</p>
             <p class="stat" style="color: #bf80ff">exp</p>
             <span style="float: right; margin-right: 10px; color: #bf80ff">
-              {{ exp }}/100</span
+              {{ exp }}/{{ maxexp }}</span
             >
             <p class="stat" style="color: #ff8066">hp</p>
             <span style="float: right; margin-right: 10px; color: #ff8066"
-              >{{ hp }}/100</span
+              >{{ hp }}/{{ maxhp }}</span
             >
             <br />
             <p class="stat">
@@ -124,7 +132,7 @@
             <form @submit.prevent="confirmed" class="c_login_window">
               <div class="c_login_title">{{ title }}</div>
               <div class="c_login_text">
-                <label for="login"> Login </label>
+                <label for="login"> New login </label>
                 <input
                   ref="login"
                   type="text"
@@ -133,7 +141,7 @@
                 />
               </div>
               <div class="c_login_text">
-                <label for="password"> Password </label>
+                <label for="password"> New password </label>
                 <input
                   ref="password"
                   type="text"

@@ -18,8 +18,16 @@ import other1 from "@/assets/images/character/other/other1.png";
 import other2 from "@/assets/images/character/other/other2.png";
 import other3 from "@/assets/images/character/other/other3.png";
 import other4 from "@/assets/images/character/other/other4.png";
+import { watch } from "vue";
 
 export default {
+  props: {
+    iBody: Number,
+    iFace: Number,
+    iDress: Number,
+    iHead: Number,
+    iOther: Number,
+  },
   data() {
     return {
       flag: 1,
@@ -55,6 +63,24 @@ export default {
 
     currentOther() {
       return this.other[this.otherIndex];
+    },
+  },
+
+  watch: {
+    iBody(iBody) {
+      return (this.bodiesIndex = iBody);
+    },
+    iFace(iFace) {
+      return (this.facesIndex = iFace);
+    },
+    iDress(iDress) {
+      return (this.dressIndex = iDress);
+    },
+    iHead(iHead) {
+      return (this.hairIndex = iHead);
+    },
+    iOther(iOther) {
+      return (this.otherIndex = iOther);
     },
   },
 
