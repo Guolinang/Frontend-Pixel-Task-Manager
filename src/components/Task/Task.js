@@ -273,5 +273,9 @@ export default {
     m_b_login() {
       this.$router.push("/");
     },
+
+    m_b_game() {
+      window.location.replace("http://localhost:3000");
+    },
   },
 };

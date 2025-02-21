@@ -62,6 +62,7 @@
         <div class="menu_conteiner">
           <p class="menu_title" v-on:click="m_b_task">Quest page</p>
           <p class="menu_title" v-on:click="m_b_profile">Your hero</p>
+          <p class="menu_title" v-on:click="m_b_game">Games</p>
           <p class="menu_title" v-on:click="m_b_login">Exit</p>
         </div>
       </div>
